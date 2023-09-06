@@ -1,0 +1,12 @@
+timer-interval: 5
+
+feature-x: false
+feature-y: false
+
+feature-z: false
+feature-z-blacklist:
+  - 1
+  - 3
+feature-z-always:
+  - 4
+  - 5
