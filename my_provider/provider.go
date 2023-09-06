@@ -40,6 +40,15 @@ func (fp FeatureProvider) BooleanEvaluation(ctx context.Context, flag string, de
 
 	boolValue := featureMap[flag].(bool)
 
+	if flag == "feature-z" {
+		//check for any blacklisted values
+		blacklisted := convertToStrings(featureMap["feature-z-blacklist"].([]interface{}))
+
+		if lookupValue(blacklisted, evalCtx["Location"].(string)) {
+			boolValue = false
+		}
+	}
+
 	return openfeature.BoolResolutionDetail{Value: boolValue}
 }
 
@@ -77,4 +86,23 @@ func (fp FeatureProvider) ObjectEvaluation(context.Context, string, interface{},
 
 func (fp FeatureProvider) StringEvaluation(context.Context, string, string, openfeature.FlattenedContext) openfeature.StringResolutionDetail {
 	return openfeature.StringResolutionDetail{}
+}
+
+func lookupValue(list []string, target string) bool {
+	for _, value := range list {
+		if value == target {
+			return true
+		}
+	}
+	return false
+}
+
+func convertToStrings(values []interface{}) []string {
+	var result []string
+	for _, v := range values {
+		if str, ok := v.(string); ok {
+			result = append(result, str)
+		}
+	}
+	return result
 }

@@ -15,24 +15,30 @@ func main() {
 
 	client := openfeature.NewClient("app")
 
+	evalCtx := openfeature.NewEvaluationContext(
+		"", map[string]interface{}{
+			"Location": "UK",
+		},
+	)
+
 	for {
 
-		x, err := client.BooleanValue(context.Background(), "feature-x", false, openfeature.EvaluationContext{})
+		x, err := client.BooleanValue(context.Background(), "feature-x", false, evalCtx)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		y, err := client.BooleanValue(context.Background(), "feature-y", false, openfeature.EvaluationContext{})
+		y, err := client.BooleanValue(context.Background(), "feature-y", false, evalCtx)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		z, err := client.BooleanValue(context.Background(), "feature-z", true, openfeature.EvaluationContext{})
+		z, err := client.BooleanValue(context.Background(), "feature-z", true, evalCtx)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		tickerInterval, err := client.IntValue(context.Background(), "timer-interval", 1, openfeature.EvaluationContext{})
+		tickerInterval, err := client.IntValue(context.Background(), "timer-interval", 1, evalCtx)
 		if err != nil {
 			log.Fatal(err)
 		}
