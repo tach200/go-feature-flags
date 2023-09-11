@@ -1,0 +1,49 @@
+# test-flag:
+#   variations:
+#     my-new-feature: true
+#     my-old-feature: false
+#   defaultRule:
+#     percentage:
+#       my-new-feature: 20
+#       my-old-feature: 80
+
+# async-flag:
+#   variations:
+#     async: true
+#     sync: false
+#   defaultRule:
+#     variation: async
+
+feature-x:
+  variations:
+    enabled: true
+    disabled: false
+  targeting:
+    - name: metadata
+      query: location eq "UK"
+      variation: enabled
+  defaultRule:
+    variation: disabled
+
+feature-y:
+  variations:
+    enabled: true
+    disabled: false
+  defaultRule:
+    variation: enabled
+
+feature-z:
+  variations:
+    enabled: true
+    disabled: false
+  defaultRule:
+    variation: disabled
+
+ticker:
+  variations:
+    slow: 15
+    medium: 7
+    fast: 3
+    custom: 1 # change the value of custom for a specific number
+  defaultRule:
+    variation: custom

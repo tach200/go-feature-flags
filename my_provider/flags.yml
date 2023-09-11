@@ -1,9 +1,8 @@
-timer-interval: 5
+timer-interval: 1
 
-feature-x: true
-feature-y: false
+feature-x: false
+feature-y: true
 
-feature-z: true
+feature-z: false
 feature-z-blacklist:
-  - "UK"
   - "Germany"
